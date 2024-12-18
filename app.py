@@ -33,6 +33,7 @@ def eval_metrics(actual, pred):
 if __name__ == "__main__":
     warnings.filterwarnings("ignore")
     np.random.seed(40)
+    dagshub.init(repo_owner='arjunravi726', repo_name='mlflow', mlflow=True)
 
     # Read the wine-quality csv file from the URL
     csv_url = (
@@ -93,4 +94,3 @@ if __name__ == "__main__":
             )
         else:
             mlflow.sklearn.log_model(lr, "model", signature=signature)
-        dagshub.init(repo_owner='arjunravi726', repo_name='mlflow', mlflow=True)
