@@ -8,6 +8,7 @@ import sys
 import warnings
 from urllib.parse import urlparse
 
+import dagshub
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import ElasticNet
@@ -77,7 +78,8 @@ if __name__ == "__main__":
 
         predictions = lr.predict(train_x)
         signature = infer_signature(train_x, predictions)
-
+        remote_url = "https://dagshub.com/arjunravi726/mlflow.mlflow"
+        mlflow.set_tracking_uri(remote_url)
         tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
 
         # Model registry does not work with file store
@@ -91,3 +93,4 @@ if __name__ == "__main__":
             )
         else:
             mlflow.sklearn.log_model(lr, "model", signature=signature)
+        dagshub.init(repo_owner='arjunravi726', repo_name='mlflow', mlflow=True)

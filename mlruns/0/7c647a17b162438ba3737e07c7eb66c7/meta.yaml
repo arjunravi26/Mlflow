@@ -1,0 +1,15 @@
+artifact_uri: file:///D:/Krish%20Naik/mlflow-1/mlflow/mlruns/0/7c647a17b162438ba3737e07c7eb66c7/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 7c647a17b162438ba3737e07c7eb66c7
+run_name: delicate-flea-712
+run_uuid: 7c647a17b162438ba3737e07c7eb66c7
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1734525192746
+status: 1
+tags: []
+user_id: Dell
