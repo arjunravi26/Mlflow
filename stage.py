@@ -1,7 +1,6 @@
 import os
 
 import mlflow
-from mlflow import MlflowClient, set_tracking_uri
 
 # Set the DagsHub API token
 os.environ["MLFLOW_TRACKING_USERNAME"] = "arjunravi726"
@@ -10,14 +9,14 @@ os.environ["MLFLOW_TRACKING_PASSWORD"] = "b19323a7f7f2713a24d2bd632075fddda73388
 
 # Set the tracking URI
 remote_url = "https://dagshub.com/arjunravi726/mlflow.mlflow"
-set_tracking_uri(remote_url)
+mlflow.set_tracking_uri(remote_url)
 
-client = MlflowClient()
+client = mlflow.MlflowClient()
 registered_models = client.search_registered_models()
 for model in registered_models:
     print(model.name)
 
- 
+
 def assign_alias_to_stage(model_name, stage, alias):
     """
     Assign an alias to the latest version of a registered model within a specified stage.
@@ -31,9 +30,8 @@ def assign_alias_to_stage(model_name, stage, alias):
     latest_mv = client.get_model_version_by_alias(name=model_name, alias=alias)
     print(
         f"Assigning alias '{alias}' to version '{latest_mv.version}' of model '{model_name}'.")
-    client.set_registered_model_alias(model_name, "champion", latest_mv.version)
+    client.set_registered_model_alias(model_name, stage, latest_mv.version)
 
-    # client.transition_model_version_stage(name=model_name,version="8",stage='Production', archive_existing_versions=True )
 
 assign_alias_to_stage("ElasticnetWineModel", "Production", "best")
 model_info = client.get_model_version_by_alias("ElasticnetWineModel", "best")
