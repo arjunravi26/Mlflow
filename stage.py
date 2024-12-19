@@ -1,14 +1,21 @@
 import os
 
+import dagshub
+import dagshub.auth
+import IPython
+import webbrowser
 import mlflow
 
 # Set the DagsHub API token
+TOKEN = dagshub.auth.get_token()
 os.environ["MLFLOW_TRACKING_USERNAME"] = "arjunravi726"
-os.environ["MLFLOW_TRACKING_PASSWORD"] = "b19323a7f7f2713a24d2bd632075fddda73388ee"
+os.environ["MLFLOW_TRACKING_PASSWORD"] = TOKEN
 
 
-# Set the tracking URI
 remote_url = "https://dagshub.com/arjunravi726/mlflow.mlflow"
+# IPython.display.IFrame(remote_url, '100%', 600)
+# Set the tracking URI
+webbrowser.open(remote_url)
 mlflow.set_tracking_uri(remote_url)
 
 client = mlflow.MlflowClient()
